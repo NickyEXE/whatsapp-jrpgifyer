@@ -1,14 +1,11 @@
-body {
+.jrpg-main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     background-color: black;
     color: #747474;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-size: .9em;
-}
-
-.main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
 }
 
 .player {

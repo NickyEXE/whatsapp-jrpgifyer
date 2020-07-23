@@ -1,5 +1,5 @@
 let grabElementFromName = (name) => {
-    console.log(name) 
+    console.log(name)
     return document.getElementById(name.split(" ")[0].toLowerCase())
 }
 
@@ -19,10 +19,10 @@ let handleMessage = (message) => {
 }
 
 let currentMessageIndex = 0
-handleMessage(testArray[0])
+handleMessage(messagesArray[0])
 
-let messageForward = () => currentMessageIndex < testArray.length && handleMessage(testArray[++currentMessageIndex])
-let messageBackward = () => currentMessageIndex > 0 && handleMessage(testArray[--currentMessageIndex])
+let messageForward = () => currentMessageIndex < messagesArray.length && handleMessage(messagesArray[++currentMessageIndex])
+let messageBackward = () => currentMessageIndex > 0 && handleMessage(messagesArray[--currentMessageIndex])
 
 document.addEventListener("keydown", (e) => {
     console.log(e.keyCode)
