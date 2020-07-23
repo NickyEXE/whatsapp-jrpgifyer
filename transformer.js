@@ -18,8 +18,7 @@ let handleMessage = (message) => {
     selectedDiv.querySelector(".message").innerHTML = message.message
 }
 
-let currentMessageIndex = 0
-handleMessage(messagesArray[0])
+handleMessage(messagesArray[currentMessageIndex])
 
 let messageForward = () => currentMessageIndex < messagesArray.length && handleMessage(messagesArray[++currentMessageIndex])
 let messageBackward = () => currentMessageIndex > 0 && handleMessage(messagesArray[--currentMessageIndex])
