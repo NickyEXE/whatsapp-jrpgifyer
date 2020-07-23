@@ -35,6 +35,8 @@ function renderApp(){
     border-style: solid;
     border-width: 2px;
     border-color: white;
+    overflow: scroll;
+    max-height: 20vh;
   }
 
   .character-name{
