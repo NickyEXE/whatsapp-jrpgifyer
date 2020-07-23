@@ -3,42 +3,6 @@ document.querySelector("#app").children[0].remove()
 
 let main = document.createElement("main")
 main.innerHTML = `<div class="jrpg-main">
-<div class="player left">
-  <header class="character-name">Mar Sanchez</header>
-  <div class="player-card left" id="reader">
-    <img src="https://i.ytimg.com/vi/ezcFLc0D5P0/maxresdefault.jpg"><div class="message"></div>
-  </div>
-</div>
-<div class="player right">
-  <header class="character-name">Tilly Scorch-the-Earth Schleppen</header>
-  <div class="player-card right" id="carla">
-    <img src="https://64.media.tumblr.com/e33a94ae45041d7b3530098789d2d996/tumblr_o8ve2qTnAG1vsv40mo1_1280.jpg"><div class="message"></div>
-  </div>
-</div>
-<div class="player left">
-  <header class="character-name">Alarielle Silvertongue</header>
-  <div class="player-card left" id="grace">
-    <img src="https://i.imgur.com/OmnlJb7.jpg"><div class="message"></div>
-  </div>
-</div>
-<div class="player right">
-  <header class="character-name">Quarthiel Silvereye</header>
-  <div class="player-card right" id="carolin">
-    <img src="https://i.imgur.com/yZkpDwi.jpg"><div class="message"></div>
-  </div>
-</div>
-<div class="player left">
-  <header class="character-name">Manack Nightdigger</header>
-  <div class="player-card left" id="maximilian">
-    <img src="https://i.imgur.com/puZ0eJ7.jpg"><div class="message"></div>
-  </div>
-</div>
-<div class="player right">
-  <header class="character-name">GM</header>
-  <div class="player-card right" id="andy">
-    <img src="https://cdnb.artstation.com/p/assets/images/images/013/400/025/large/antonio-j-manzanedo-red-dragon-manzanedo3.jpg?1539429909"><div class="message"></div>
-  </div>
-</div>
 </div>`
 
 document.querySelector("#app").appendChild(main)
@@ -53,9 +17,11 @@ style.innerHTML = `.jrpg-main {
   color: #747474;
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: .9em;
+  height: 100vh;
+  padding: 3em;
 }
 
-.player {
+.jrpg-main .player {
   width: 45%;
   margin-top: 1.5em;
 }
@@ -79,24 +45,24 @@ style.innerHTML = `.jrpg-main {
   color: black;
 }
 
-.player-card.right {
+.player:nth-child(even) .player-card {
   flex-direction: row-reverse;
 }
 
-.player.right {
+.player:nth-child(even) {
   padding-right: 0em;
   text-align: right;
 }
 
-.player.left {
+.player:nth-child(odd) {
   padding-left: 0em;
 }
 
-.player-card.left .message{
+.player:nth-child(odd) .player-card .message{
   padding-left: .9em;
 }
 
-.player-card.right .message{
+.player:nth-child(even) .player-card .message{
   padding-right: .9em;
 }
 
@@ -105,6 +71,7 @@ style.innerHTML = `.jrpg-main {
   height: 20vh;
   object-fit: cover;
   object-position: 50% 0%;
-}`
+}
+`
 
 document.head.appendChild(style)

@@ -15,8 +15,7 @@ const createElementByFirstName = (name) => {
   div.innerHTML = `<header class="character-name">${nameHash[name].characterName}</header>
   <div class="player-card" id=${name}>
     <img src="${nameHash[name].image}"><div class="message"></div>
-  </div>
-  `
+  </div>`
   document.querySelector(".jrpg-main").appendChild(div)
   return div.children[1]
 }
@@ -31,7 +30,7 @@ let grabOrCreateElementFromName = (name) => {
   }
 }
 
-handleNonSelectedBox = (element) => {
+let handleNonSelectedBox = (element) => {
   element.classList.remove("selected")
   element.dataset.tilDeletion && element.dataset.tilDeletion --
   if (element.dataset.tilDeletion < 0){element.querySelector(".message").innerHTML = ""}
@@ -45,7 +44,7 @@ let handleMessage = (message) => {
   selectedDiv.querySelector(".message").innerHTML = message.message
 }
 
-handleMessage(messagesArray[currentMessageIndex])
+// handleMessage(messagesArray[currentMessageIndex])
 let messageForward = () => currentMessageIndex < messagesArray.length && handleMessage(messagesArray[++currentMessageIndex])
 let messageBackward = () => currentMessageIndex > 0 && handleMessage(messagesArray[--currentMessageIndex])
 
