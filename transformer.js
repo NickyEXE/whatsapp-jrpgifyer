@@ -1,5 +1,4 @@
 let grabElementFromName = (name) => {
-    console.log(name)
     return document.getElementById(name.split(" ")[0].toLowerCase())
 }
 
@@ -19,7 +18,6 @@ let handleMessage = (message) => {
 }
 
 handleMessage(messagesArray[currentMessageIndex])
-
 let messageForward = () => currentMessageIndex < messagesArray.length && handleMessage(messagesArray[++currentMessageIndex])
 let messageBackward = () => currentMessageIndex > 0 && handleMessage(messagesArray[--currentMessageIndex])
 
