@@ -4,22 +4,31 @@ const nameHash = {
   "grace": {characterName: "Alarielle Silvertongue", image: "https://i.imgur.com/OmnlJb7.jpg" },
   "carolin": {characterName: "Quarthiel Silvereye", image: "https://i.imgur.com/yZkpDwi.jpg" },
   "maximilian": {characterName: "Manack Nightdigger", image: "https://i.imgur.com/puZ0eJ7.jpg"},
-  "andy": {characterName: "Game Master", image: "https://cdnb.artstation.com/p/assets/images/images/013/400/025/large/antonio-j-manzanedo-red-dragon-manzanedo3.jpg?1539429909"}
+  "andy": {characterName: "Game Master", image: "https://cdnb.artstation.com/p/assets/images/images/013/400/025/large/antonio-j-manzanedo-red-dragon-manzanedo3.jpg?1539429909"},
+  "reader": {characterName: "Mar Sanchez", image: "https://i.ytimg.com/vi/ezcFLc0D5P0/maxresdefault.jpg"},
 }
 
 const createElementByFirstName = (name) => {
   let div = document.createElement("div")
   div.classList.add("player")
+  div.classList.add("selected")
   div.innerHTML = `<header class="character-name">${nameHash[name].characterName}</header>
-  <div class="player-card" id="reader">
+  <div class="player-card" id=${name}>
     <img src="${nameHash[name].image}"><div class="message"></div>
   </div>
   `
   document.querySelector(".jrpg-main").appendChild(div)
+  return div.children[1]
 }
 
-let grabElementFromName = (name) => {
-  return document.getElementById(name.split(" ")[0].toLowerCase())
+let grabOrCreateElementFromName = (name) => {
+  let firstName = name.split(" ")[0].toLowerCase()
+  if (document.getElementById(firstName)){
+    return document.getElementById(firstName)
+  }
+  else {
+    return createElementByFirstName(firstName)
+  }
 }
 
 handleNonSelectedBox = (element) => {
@@ -30,7 +39,7 @@ handleNonSelectedBox = (element) => {
 
 let handleMessage = (message) => {
   [...document.querySelectorAll(".player-card")].forEach(handleNonSelectedBox)
-  let selectedDiv = grabElementFromName(message.name)
+  let selectedDiv = grabOrCreateElementFromName(message.name)
   selectedDiv.classList.add("selected");
   selectedDiv.dataset.tilDeletion = 3
   selectedDiv.querySelector(".message").innerHTML = message.message
@@ -41,9 +50,8 @@ let messageForward = () => currentMessageIndex < messagesArray.length && handleM
 let messageBackward = () => currentMessageIndex > 0 && handleMessage(messagesArray[--currentMessageIndex])
 
 document.addEventListener("keydown", (e) => {
-  console.log(e.keyCode)
   e.keyCode === 39 && messageForward();
   e.keyCode === 37 && messageBackward();
 })
 
-createElementByFirstName("nicky")
+// createElementByFirstName("nicky")
