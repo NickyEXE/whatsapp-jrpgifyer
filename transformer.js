@@ -1,10 +1,21 @@
-nameHash = {
-  "carla": "Tilly Scorch-the-Earth Schleppen",
-  "nicky": "Mar Sanchez",
-  "grace": "Alarielle Silvertongue",
-  "carolin": "Quarthiel Silvereye",
-  "maximilian": "Manack Nightdigger",
-  "andy": "Game Master"
+const nameHash = {
+  "carla": {characterName: "Tilly Scorch-the-Earth Schleppen", image: "https://64.media.tumblr.com/e33a94ae45041d7b3530098789d2d996/tumblr_o8ve2qTnAG1vsv40mo1_1280.jpg"},
+  "nicky": {characterName: "Mar Sanchez", image: "https://i.ytimg.com/vi/ezcFLc0D5P0/maxresdefault.jpg"},
+  "grace": {characterName: "Alarielle Silvertongue", image: "https://i.imgur.com/OmnlJb7.jpg" },
+  "carolin": {characterName: "Quarthiel Silvereye", image: "https://i.imgur.com/yZkpDwi.jpg" },
+  "maximilian": {characterName: "Manack Nightdigger", image: "https://i.imgur.com/puZ0eJ7.jpg"},
+  "andy": {characterName: "Game Master", image: "https://cdnb.artstation.com/p/assets/images/images/013/400/025/large/antonio-j-manzanedo-red-dragon-manzanedo3.jpg?1539429909"}
+}
+
+const createElementByFirstName = (name) => {
+  let div = document.createElement("div")
+  div.classList.add("player")
+  div.innerHTML = `<header class="character-name">${nameHash[name].characterName}</header>
+  <div class="player-card" id="reader">
+    <img src="${nameHash[name].image}"><div class="message"></div>
+  </div>
+  `
+  document.querySelector(".jrpg-main").appendChild(div)
 }
 
 let grabElementFromName = (name) => {
@@ -34,3 +45,5 @@ document.addEventListener("keydown", (e) => {
   e.keyCode === 39 && messageForward();
   e.keyCode === 37 && messageBackward();
 })
+
+createElementByFirstName("nicky")
