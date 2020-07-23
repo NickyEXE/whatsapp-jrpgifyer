@@ -44,13 +44,8 @@ let handleMessage = (message) => {
   selectedDiv.querySelector(".message").innerHTML = message.message
 }
 
-// handleMessage(messagesArray[currentMessageIndex])
 let messageForward = () => currentMessageIndex < messagesArray.length && handleMessage(messagesArray[++currentMessageIndex])
 let messageBackward = () => currentMessageIndex > 0 && handleMessage(messagesArray[--currentMessageIndex])
 
-document.addEventListener("keydown", (e) => {
-  e.keyCode === 39 && messageForward();
-  e.keyCode === 37 && messageBackward();
-})
 
 // createElementByFirstName("nicky")
