@@ -1,6 +1,10 @@
 nameHash = {
+  "carla": "Tilly Scorch-the-Earth Schleppen",
   "nicky": "Mar Sanchez",
-  "carla": "Tilly Scorch-the-Earth Schleppen"
+  "grace": "Alarielle Silvertongue",
+  "carolin": "Quarthiel Silvereye",
+  "maximilian": "Manack Nightdigger",
+  "andy": "Game Master"
 }
 
 let grabElementFromName = (name) => {
