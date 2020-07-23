@@ -10,7 +10,7 @@
     padding: 3em;
 }
 
-.player {
+.jrpg-main .player {
     width: 45%;
     margin-top: 1.5em;
 }
@@ -34,24 +34,24 @@
     color: black;
 }
 
-.player-card.right {
+.player:nth-child(even) .player-card {
     flex-direction: row-reverse;
 }
 
-.player.right {
+.player:nth-child(even) {
     padding-right: 0em;
     text-align: right;
 }
 
-.player.left {
+.player:nth-child(odd) {
     padding-left: 0em;
 }
 
-.player-card.left .message{
+.player:nth-child(odd) .player-card .message{
     padding-left: .9em;
 }
 
-.player-card.right .message{
+.player:nth-child(even) .player-card .message{
     padding-right: .9em;
 }
 
