@@ -47,6 +47,15 @@ const nameHash = {
   "reader": {characterName: "Mar Sanchez", image: "https://i.ytimg.com/vi/ezcFLc0D5P0/maxresdefault.jpg"},
 }
 
+function set_reader_by_first_name(name){
+  if (nameHash[name]){
+    nameHash["reader"] = nameHash[name]
+  }
+  else{
+    console.log("Please enter one of the following without quotes:", nameHash.keys)
+  }
+}
+
 const createElementByFirstName = (name) => {
   let div = document.createElement("div")
   div.classList.add("player")
@@ -105,6 +114,7 @@ function renderApp(){
     flex-wrap: wrap;
     justify-content: space-between;
     background-color: black;
+    background-image: url(https://i.imgur.com/TuTeXwS.jpg);
     color: #747474;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-size: .9em;
@@ -168,6 +178,8 @@ function renderApp(){
   `
 
   document.head.appendChild(style)
+  document.querySelector("footer").querySelector(".copyable-area").style.backgroundColor = "black"
+  document.querySelector("footer").querySelector(".copyable-area").style.fontFamily = '"Palatino Linotype", "Book Antiqua", Palatino, serif'
 }
 // When a message is clicked, grab all the messages and set the clicked one as the first one to render
 let selectNode = (node) => {

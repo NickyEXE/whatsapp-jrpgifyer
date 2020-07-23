@@ -8,6 +8,15 @@ const nameHash = {
   "reader": {characterName: "Mar Sanchez", image: "https://i.ytimg.com/vi/ezcFLc0D5P0/maxresdefault.jpg"},
 }
 
+function set_reader_by_first_name(name){
+  if (nameHash[name]){
+    nameHash["reader"] = nameHash[name]
+  }
+  else{
+    console.log("Please enter one of the following without quotes:", nameHash.keys)
+  }
+}
+
 const createElementByFirstName = (name) => {
   let div = document.createElement("div")
   div.classList.add("player")

@@ -15,6 +15,7 @@ function renderApp(){
     flex-wrap: wrap;
     justify-content: space-between;
     background-color: black;
+    background-image: url(https://i.imgur.com/TuTeXwS.jpg);
     color: #747474;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-size: .9em;
@@ -78,4 +79,6 @@ function renderApp(){
   `
 
   document.head.appendChild(style)
+  document.querySelector("footer").querySelector(".copyable-area").style.backgroundColor = "black"
+  document.querySelector("footer").querySelector(".copyable-area").style.fontFamily = '"Palatino Linotype", "Book Antiqua", Palatino, serif'
 }
