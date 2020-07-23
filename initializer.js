@@ -1,15 +1,18 @@
 // When a message is clicked, grab all the messages and set the clicked one as the first one to render
-let selectNode = (e) => {
+let selectNode = (node) => {
   grabMessages()
-  selectedNode = e.target.closest(".message-in, .message-out")
-  console.log("messages array", messagesArray)
-  currentMessageIndex = messagesArray.findIndex(hash => selectedNode.innerText.includes(hash.time))
-  console.log("message index", currentMessageIndex)
+  currentMessageIndex = messagesArray.findIndex(hash => node.innerText.includes(hash.time))
   renderApp()
   handleMessage(messagesArray[currentMessageIndex])
 }
-document.querySelectorAll(".message-in, .message-out").forEach(node => node.addEventListener("click", selectNode))
 
+const handleUserMessageClick = (e) => {
+  if (e.target.closest(".message-in, .message-out")){
+    selectNode(e.target.closest(".message-in, .message-out"))
+  }
+}
+
+document.addEventListener("click", handleUserMessageClick)
 
 document.addEventListener("keydown", (e) => {
   e.keyCode === 39 && messageForward();
