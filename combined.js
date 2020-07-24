@@ -9,6 +9,14 @@ let firstPreviousSiblingWithFunc = (node, func) => {
 let doesMessageHavePlayerName = (node) => {
   return [...node.querySelector("._274yw").children].length === 3
 }
+
+function hashCode(s) {
+  let h;
+  for(let i = 0; i < s.length; i++)
+        h = Math.imul(31, h) + s.charCodeAt(i) | 0;
+
+  return h;
+}
 let messagesArray = []
 
 let charactersHash = {}
@@ -16,9 +24,15 @@ let selectedNode
 let currentMessageIndex
 let memoizedMessages = {}
 
+let memoizeAndStoreMessage = (name, message, time) => {
+  let hashedString = hashCode(message + time + name)
+  if (!memoizedMessages[hashedString]){
+    memoizedMessages[hashedString] = true
+    messagesArray.push({name: name, message: message, time: time})
+  }
+}
+
 function grabMessages(){
-  // Clean the previous messages array
-  messagesArray = []
   let nodes = [...document.querySelectorAll(".message-in, .message-out")]
   console.log("grabbing nodes", nodes.length)
   // Ensure the first message isn't one with no name
@@ -44,7 +58,7 @@ function grabMessages(){
         name = arr[0]
         time = arr[2]
       }
-      messagesArray.push({name: name, message: message, time: time})
+      memoizeAndStoreMessage(name, message, time)
     }
   }
   nodes.forEach(itemToHash)

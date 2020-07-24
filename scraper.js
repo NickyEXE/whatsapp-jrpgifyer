@@ -5,9 +5,15 @@ let selectedNode
 let currentMessageIndex
 let memoizedMessages = {}
 
+let memoizeAndStoreMessage = (name, message, time) => {
+  let hashedString = hashCode(message + time + name)
+  if (!memoizedMessages[hashedString]){
+    memoizedMessages[hashedString] = true
+    messagesArray.push({name: name, message: message, time: time})
+  }
+}
+
 function grabMessages(){
-  // Clean the previous messages array
-  messagesArray = []
   let nodes = [...document.querySelectorAll(".message-in, .message-out")]
   console.log("grabbing nodes", nodes.length)
   // Ensure the first message isn't one with no name
@@ -33,7 +39,7 @@ function grabMessages(){
         name = arr[0]
         time = arr[2]
       }
-      messagesArray.push({name: name, message: message, time: time})
+      memoizeAndStoreMessage(name, message, time)
     }
   }
   nodes.forEach(itemToHash)
