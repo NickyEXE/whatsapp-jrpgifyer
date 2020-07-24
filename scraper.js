@@ -3,15 +3,15 @@ let messagesArray = []
 let charactersHash = {}
 let selectedNode
 let currentMessageIndex
+let memoizedMessages = {}
 
 function grabMessages(){
+  // Clean the previous messages array
+  messagesArray = []
   let nodes = [...document.querySelectorAll(".message-in, .message-out")]
   console.log("grabbing nodes", nodes.length)
   // Ensure the first message isn't one with no name
-  let checkMessage = (node) => {
-    return [...node.querySelector("._274yw").children].length === 3
-  }
-  let starting_num = nodes.findIndex(checkMessage)
+  let starting_num = nodes.findIndex(doesMessageHavePlayerName)
   nodes = nodes.slice(starting_num, nodes.length)
 
   // turn messages into array of hashes
@@ -20,7 +20,13 @@ function grabMessages(){
       let arr = [...node.querySelector("._274yw").children].map(item => item.innerText)
       let message = node.querySelector("._274yw").querySelector(".copyable-text").firstChild.firstChild.firstChild.innerHTML
       if (arr.length === 2 && node.closest(".message-in")){
-        messagesArray.push({name: messagesArray[messagesArray.length -1].name, message: message, time: arr[1]})
+        // this is going to cause bugs, needs to be abstracted and done recursively:
+        let nearestNodeWithName = firstPreviousSiblingWithFunc(node, doesMessageHavePlayerName)
+        console.log(nearestNodeWithName)
+        // this almost definitely can be done without mapping through all children
+        let name = [...nearestNodeWithName.querySelector("._274yw").children].map(item => item.innerText)[0];
+        let time = arr[1]
+        messagesArray.push({name: name, message: message, time: time})
       }
       else if (arr.length === 2 && node.closest(".message-out")){
         messagesArray.push({name: "reader", message: message, time: arr[1]})

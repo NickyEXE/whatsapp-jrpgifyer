@@ -1,6 +1,6 @@
 function renderApp(){
   document.querySelector("#app").appendChild(document.querySelector("footer"))
-  document.querySelector("#app").children[0].remove()
+  document.querySelector("#app").children[0].style.display = "none"
 
   let main = document.createElement("main")
   main.innerHTML = `<div class="jrpg-main">
