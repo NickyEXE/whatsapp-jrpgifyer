@@ -30,21 +30,21 @@ function grabMessages(){
     if (node.querySelector("._274yw")){
       let arr = [...node.querySelector("._274yw").children].map(item => item.innerText)
       let message = node.querySelector("._274yw").querySelector(".copyable-text").firstChild.firstChild.firstChild.innerHTML
+      let name, time
       if (arr.length === 2 && node.closest(".message-in")){
-        // this is going to cause bugs, needs to be abstracted and done recursively:
         let nearestNodeWithName = firstPreviousSiblingWithFunc(node, doesMessageHavePlayerName)
-        console.log(nearestNodeWithName)
-        // this almost definitely can be done without mapping through all children
-        let name = [...nearestNodeWithName.querySelector("._274yw").children].map(item => item.innerText)[0];
-        let time = arr[1]
-        messagesArray.push({name: name, message: message, time: time})
+        name = nearestNodeWithName.querySelector("._274yw").firstChild.innerText
+        time = arr[1]
       }
       else if (arr.length === 2 && node.closest(".message-out")){
-        messagesArray.push({name: "reader", message: message, time: arr[1]})
+        name = "reader"
+        time = arr[1]
       }
       else {
-        messagesArray.push({name: arr[0], message: message, time: arr[2]})
+        name = arr[0]
+        time = arr[2]
       }
+      messagesArray.push({name: name, message: message, time: time})
     }
   }
   nodes.forEach(itemToHash)
