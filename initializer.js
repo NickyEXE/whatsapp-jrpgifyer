@@ -1,5 +1,6 @@
 // When a message is clicked, grab all the messages and set the clicked one as the first one to render
 let selectNode = (node) => {
+  setReaderByFirstName("nicky")
   grabMessages()
   currentMessageIndex = messagesArray.findIndex(hash => node.innerText.includes(hash.time))
   renderApp()

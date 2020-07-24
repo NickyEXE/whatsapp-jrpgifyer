@@ -5,10 +5,9 @@ const nameHash = {
   "carolin": {characterName: "Quarthiel Silvereye", image: "https://i.imgur.com/yZkpDwi.jpg" },
   "maximilian": {characterName: "Manack Nightdigger", image: "https://i.imgur.com/puZ0eJ7.jpg"},
   "andy": {characterName: "Game Master", image: "https://cdnb.artstation.com/p/assets/images/images/013/400/025/large/antonio-j-manzanedo-red-dragon-manzanedo3.jpg?1539429909"},
-  "reader": {characterName: "Mar Sanchez", image: "https://i.ytimg.com/vi/ezcFLc0D5P0/maxresdefault.jpg"},
 }
 
-function set_reader_by_first_name(name){
+function setReaderByFirstName(name){
   if (nameHash[name]){
     nameHash["reader"] = nameHash[name]
   }
@@ -53,7 +52,7 @@ let handleMessage = (message) => {
   selectedDiv.querySelector(".message").innerHTML = message.message
 }
 
-let messageForward = () => currentMessageIndex < messagesArray.length && handleMessage(messagesArray[++currentMessageIndex])
+let messageForward = () => currentMessageIndex + 1 < messagesArray.length && handleMessage(messagesArray[++currentMessageIndex])
 let messageBackward = () => currentMessageIndex > 0 && handleMessage(messagesArray[--currentMessageIndex])
 
 
