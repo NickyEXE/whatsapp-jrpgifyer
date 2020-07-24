@@ -80,5 +80,5 @@ function renderApp(){
 
   document.head.appendChild(style)
   document.querySelector("footer").querySelector(".copyable-area").style.backgroundColor = "black"
-  document.querySelector("footer").querySelector(".copyable-area").style.fontFamily = '"Palatino Linotype", "Book Antiqua", Palatino, serif'
+  document.querySelector("footer").querySelector(".copyable-area").style.fontFamily = `"Palatino Linotype", "Book Antiqua", Palatino, serif`
 }
