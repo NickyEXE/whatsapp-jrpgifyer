@@ -110,7 +110,9 @@ function renderApp(){
   `
 
   document.head.appendChild(style)
+  // reuse whatsapp message bar
   document.querySelector("footer").querySelector(".copyable-area").style.backgroundColor = "black"
   document.querySelector("footer").querySelector(".copyable-area").style.fontFamily = `"Palatino Linotype", "Book Antiqua", Palatino, serif`
+  document.querySelector("._1JNuk").style.display = "none"
   document.getElementById("auto-reader-button").addEventListener("click", autoReaderButtonPress)
 }
