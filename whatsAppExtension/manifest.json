@@ -2,19 +2,19 @@
   "name": "WhatsApp JRPGifier",
   "version": "0.1",
   "description": "Read about Krethmore the right way.",
-  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "permissions": ["activeTab", "declarativeContent", "storage", "https://web.whatsapp.com/"],
   "options_page": "options.html",
   "background": {
-    "scripts": ["combined.js"],
+    "scripts": ["./combined.js"],
     "persistent": false
   },
-  "page_action": {
+  "browser_action": {
     "default_popup": "popup.html",
     "default_icon": {
+      "128": "images/d_20_128.png",
       "16": "images/d_20_16.png",
       "32": "images/d_20_32.png",
-      "48": "images/d_20_48.png",
-      "128": "images/d_20_128.png"
+      "48": "images/d_20_48.png"
     }
   },
   "icons": {

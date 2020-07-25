@@ -337,4 +337,4 @@ const beginMessagePolling = () => {
   }, 2000)
 }
 
-setReaderByFirstName("nicky")
+setReaderByFirstName(chromeReader)

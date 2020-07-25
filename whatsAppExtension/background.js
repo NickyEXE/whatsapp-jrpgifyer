@@ -4,10 +4,10 @@
 
 'use strict';
 
-chrome.runtime.onInstalled.addListener(function() {
-  chrome.storage.sync.set({reader: 'nicky'}, function() {
-    console.log('Current reader is nicky.');
-  });
+// chrome.runtime.onInstalled.addListener(function() {
+//   chrome.storage.sync.set({reader: 'nicky'}, function() {
+//     console.log('Current reader is nicky.');
+//   });
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
     chrome.declarativeContent.onPageChanged.addRules([{
       conditions: [new chrome.declarativeContent.PageStateMatcher({
@@ -16,4 +16,4 @@ chrome.runtime.onInstalled.addListener(function() {
       actions: [new chrome.declarativeContent.ShowPageAction()]
     }]);
   });
-});
+// });

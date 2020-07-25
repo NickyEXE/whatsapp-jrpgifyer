@@ -4,18 +4,48 @@
 
 'use strict';
 
+let reader
+
 let startJrpg = document.getElementById('startJrpg');
 
-// chrome.storage.sync.get('color', function(data) {
-//   startJrpg.style.backgroundColor = data.color;
-//   startJrpg.setAttribute('value', data.color);
-// });
+chrome.storage.sync.get('reader', function(data) {
+  reader = data.reader
+  console.log(reader)
+});
 
-startJrpg.onclick = function(element) {
-  let color = element.target.value;
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+// startJrpg.onclick = function () {
+//   // let color = element.target.value;
+//   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+//     chrome.tabs.executeScript(
+//         tabs[0].id,
+//         {code: 'console.log("hello world"'},
+//         function(){
+//           chrome.tabs.executeScript(
+//             tabs[0].id,
+//             {file: '/combined.js'});
+//         });
+//   });
+// };
+
+let injection = () => {
+  console.log("clicked!")
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
     chrome.tabs.executeScript(
-        tabs[0].id,
-        {code: 'combined.js'});
-  });
-};
+      tabs[0].id,
+      {code: `const chromeReader= "${reader}"`},
+      function(){
+        chrome.tabs.executeScript(
+          tabs[0].id,
+          {file: '/combined.js'}
+        )
+      }
+    );
+  })
+}
+//   chrome.tabs.executeScript(tab.id, {
+//     code: 'let cheese = "batman";'
+//   }, function() {
+//     chrome.tabs.executeScript(tab.id, {file: 'combined.js'});
+//   })
+// }
+startJrpg.addEventListener("click", injection)
