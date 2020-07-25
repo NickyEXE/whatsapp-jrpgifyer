@@ -5,6 +5,7 @@ let selectNode = (node) => {
   currentMessageIndex = messagesArray.findIndex(hash => node.innerText.includes(hash.time))
   renderApp()
   handleMessage(messagesArray[currentMessageIndex])
+  beginMessagePolling()
 }
 
 const handleUserMessageClick = (e) => {
@@ -19,3 +20,11 @@ document.addEventListener("keydown", (e) => {
   e.keyCode === 39 && messageForward();
   e.keyCode === 37 && messageBackward();
 })
+
+
+let beginMessagePolling = () => {
+  setInterval(() => {
+    grabMessages()
+    checkArrows()
+  }, 2000)
+}

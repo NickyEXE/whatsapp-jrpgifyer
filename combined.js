@@ -74,6 +74,8 @@ function grabMessages(){
   }
   messagesArray.forEach(objInHash)
   console.log("new Message Array Length", messagesArray.length)
+  console.log("currentMessageIndex", currentMessageIndex)
+  console.log("currentMessageAtIndex", messagesArray[currentMessageIndex])
 }
 const nameHash = {
   "carla": {characterName: "Tilly Scorch-the-Earth Schleppen", image: "https://64.media.tumblr.com/e33a94ae45041d7b3530098789d2d996/tumblr_o8ve2qTnAG1vsv40mo1_1280.jpg"},
@@ -271,6 +273,7 @@ let selectNode = (node) => {
   currentMessageIndex = messagesArray.findIndex(hash => node.innerText.includes(hash.time))
   renderApp()
   handleMessage(messagesArray[currentMessageIndex])
+  beginMessagePolling()
 }
 
 const handleUserMessageClick = (e) => {
@@ -285,3 +288,7 @@ document.addEventListener("keydown", (e) => {
   e.keyCode === 39 && messageForward();
   e.keyCode === 37 && messageBackward();
 })
+
+let beginMessagePolling = () => {
+  setInterval(grabMessages, 2000)
+}
