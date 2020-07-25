@@ -42,7 +42,6 @@ let createMessageFromNode = (node) => {
 
 function grabMessages(){
   let nodes = [...document.querySelectorAll(".message-in, .message-out")]
-  console.log("grabbing nodes", nodes.length)
   // Ensure the first message isnt one with no name, as the names for those are found recursively going backwards through nearestNodeWithName
   let starting_num = nodes.findIndex(doesMessageHavePlayerName)
   nodes = nodes.slice(starting_num, nodes.length)
@@ -53,4 +52,5 @@ function grabMessages(){
     charactersHash[nam] = 1
   }
   messagesArray.forEach(objInHash)
+  console.log("new Message Array Length", messagesArray.length)
 }
