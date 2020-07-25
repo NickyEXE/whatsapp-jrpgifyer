@@ -158,6 +158,7 @@ let messageBackward = () => {
   if (currentMessageIndex > 0){
     currentMessageIndex --
     handleMessage(messagesArray[currentMessageIndex])
+    turnOffAutoReader()
     checkArrows()
   }
 }
@@ -169,8 +170,10 @@ function renderApp(){
   document.querySelector("#app").children[0].style.display = "none"
 
   let main = document.createElement("main")
-  main.innerHTML = `<div class="jrpg-main">
-  <div class="arrows"><span id="back-arrow">◂</span> <span id="forward-arrow">▸</span></div>
+  main.innerHTML = `
+  <div class="jrpg-main">
+    <div class="arrows"><span id="back-arrow">◂</span> <span id="forward-arrow">▸</span></div>
+    <button id="auto-reader-button">Real Time Messages: Off</button>
   </div>`
 
   document.querySelector("#app").appendChild(main)
@@ -260,11 +263,23 @@ function renderApp(){
   .deactivated-arrow {
     display: none;
   }
+
+  #auto-reader-button{
+    position: fixed;
+    bottom: 1.5em;
+    left: 1em;
+    background-color: #db955991;
+    padding: .5em;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: .5em;
+  }
   `
 
   document.head.appendChild(style)
   document.querySelector("footer").querySelector(".copyable-area").style.backgroundColor = "black"
   document.querySelector("footer").querySelector(".copyable-area").style.fontFamily = `"Palatino Linotype", "Book Antiqua", Palatino, serif`
+  document.getElementById("auto-reader-button").addEventListener("click", autoReaderButtonPress)
 }
 // When a message is clicked, grab all the messages and set the clicked one as the first one to render
 let selectNode = (node) => {
@@ -289,6 +304,32 @@ document.addEventListener("keydown", (e) => {
   e.keyCode === 37 && messageBackward();
 })
 
-let beginMessagePolling = () => {
-  setInterval(grabMessages, 2000)
+let autoReader = false
+
+const turnOffAutoReader = () => {
+  autoReader = false
+  document.getElementById("auto-reader-button").innerText = "Real Time Messages: Off"
+}
+
+const turnOnAutoReader = () => {
+  autoReader = true
+  document.getElementById("auto-reader-button").innerText = "Real Time Messages: On"
+  checkArrows()
+}
+
+const autoReaderButtonPress = () => autoReader ? turnOffAutoReader() : turnOnAutoReader()
+
+const autoRead = () => {
+  if (messagesArray.length - 1 > currentMessageIndex){
+    messagesArray.slice(currentMessageIndex, messagesArray.length).forEach(handleMessage)
+    currentMessageIndex = messagesArray.length - 1
+  }
+}
+
+const beginMessagePolling = () => {
+  setInterval(() => {
+    grabMessages()
+    checkArrows()
+    autoReader && autoRead()
+  }, 2000)
 }

@@ -21,10 +21,31 @@ document.addEventListener("keydown", (e) => {
   e.keyCode === 37 && messageBackward();
 })
 
+let autoReader = false
 
-let beginMessagePolling = () => {
+const turnOffAutoReader = () => {
+  autoReader = false
+  document.getElementById("auto-reader-button").innerText = "Real Time Messages: Off"
+}
+
+const turnOnAutoReader = () => {
+  autoReader = true
+  document.getElementById("auto-reader-button").innerText = "Real Time Messages: On"
+}
+
+const autoReaderButtonPress = () => autoReader ? turnOffAutoReader() : turnOnAutoReader()
+
+const autoRead = () => {
+  if (messagesArray.length - 1 > currentMessageIndex){
+    messagesArray.slice(currentMessageIndex, messagesArray.length).forEach(handleMessage)
+    currentMessageIndex = messagesArray.length - 1
+  }
+}
+
+const beginMessagePolling = () => {
   setInterval(() => {
     grabMessages()
     checkArrows()
+    autoReader && autoRead()
   }, 2000)
 }

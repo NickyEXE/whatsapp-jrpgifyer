@@ -79,6 +79,7 @@ let messageBackward = () => {
   if (currentMessageIndex > 0){
     currentMessageIndex --
     handleMessage(messagesArray[currentMessageIndex])
+    turnOffAutoReader()
     checkArrows()
   }
 }

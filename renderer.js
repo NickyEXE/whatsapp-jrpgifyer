@@ -3,8 +3,10 @@ function renderApp(){
   document.querySelector("#app").children[0].style.display = "none"
 
   let main = document.createElement("main")
-  main.innerHTML = `<div class="jrpg-main">
-  <div class="arrows"><span id="back-arrow">◂</span> <span id="forward-arrow">▸</span></div>
+  main.innerHTML = `
+  <div class="jrpg-main">
+    <div class="arrows"><span id="back-arrow">◂</span> <span id="forward-arrow">▸</span></div>
+    <button id="auto-reader-button">Real Time Messages: Off</button>
   </div>`
 
   document.querySelector("#app").appendChild(main)
@@ -94,9 +96,21 @@ function renderApp(){
   .deactivated-arrow {
     display: none;
   }
+
+  #auto-reader-button{
+    position: fixed;
+    bottom: 1.5em;
+    left: 1em;
+    background-color: #db955991;
+    padding: .5em;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: .5em;
+  }
   `
 
   document.head.appendChild(style)
   document.querySelector("footer").querySelector(".copyable-area").style.backgroundColor = "black"
   document.querySelector("footer").querySelector(".copyable-area").style.fontFamily = `"Palatino Linotype", "Book Antiqua", Palatino, serif`
+  document.getElementById("auto-reader-button").addEventListener("click", autoReaderButtonPress)
 }
