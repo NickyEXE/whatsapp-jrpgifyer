@@ -63,7 +63,6 @@ let createMessageFromNode = (node) => {
 
 function grabMessages(){
   let nodes = [...document.querySelectorAll(".message-in, .message-out")]
-  console.log("grabbing nodes", nodes.length)
   // Ensure the first message isnt one with no name, as the names for those are found recursively going backwards through nearestNodeWithName
   let starting_num = nodes.findIndex(doesMessageHavePlayerName)
   nodes = nodes.slice(starting_num, nodes.length)
@@ -74,6 +73,7 @@ function grabMessages(){
     charactersHash[nam] = 1
   }
   messagesArray.forEach(objInHash)
+  console.log("new Message Array Length", messagesArray.length)
 }
 const nameHash = {
   "carla": {characterName: "Tilly Scorch-the-Earth Schleppen", image: "https://64.media.tumblr.com/e33a94ae45041d7b3530098789d2d996/tumblr_o8ve2qTnAG1vsv40mo1_1280.jpg"},
@@ -130,8 +130,35 @@ let handleMessage = (message) => {
   selectedDiv.querySelector(".message").innerHTML = message.message
 }
 
-let messageForward = () => currentMessageIndex + 1 < messagesArray.length && handleMessage(messagesArray[++currentMessageIndex])
-let messageBackward = () => currentMessageIndex > 0 && handleMessage(messagesArray[--currentMessageIndex])
+let checkArrows = () => {
+  if (currentMessageIndex +1 >= messagesArray.length){
+    document.getElementById("forward-arrow").classList.add("deactivated-arrow")
+  }
+  else{
+    document.getElementById("forward-arrow").classList.remove("deactivated-arrow")
+  }
+  if (currentMessageIndex <= 0){
+    document.getElementById("back-arrow").classList.add("deactivated-arrow")
+  }
+  else {
+    document.getElementById("back-arrow").classList.remove("deactivated-arrow")
+  }
+}
+
+let messageForward = () => {
+  if (currentMessageIndex + 1 < messagesArray.length){
+    currentMessageIndex ++
+    handleMessage(messagesArray[currentMessageIndex])
+    checkArrows()
+  }
+}
+let messageBackward = () => {
+  if (currentMessageIndex > 0){
+    currentMessageIndex --
+    handleMessage(messagesArray[currentMessageIndex])
+    checkArrows()
+  }
+}
 
 
 // createElementByFirstName("nicky")
@@ -157,8 +184,9 @@ function renderApp(){
     color: #747474;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-size: .9em;
-    height: 100vh;
+    height: 90vh;
     padding: 3em;
+    padding-top: 0;
   }
 
   .jrpg-main .player {
@@ -225,6 +253,10 @@ function renderApp(){
     -webkit-text-stroke-width: 3px;
     -webkit-text-stroke-color: #272727;
     bottom: 0em;
+  }
+
+  .deactivated-arrow {
+    display: none;
   }
   `
 

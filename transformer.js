@@ -53,8 +53,35 @@ let handleMessage = (message) => {
   selectedDiv.querySelector(".message").innerHTML = message.message
 }
 
-let messageForward = () => currentMessageIndex + 1 < messagesArray.length && handleMessage(messagesArray[++currentMessageIndex])
-let messageBackward = () => currentMessageIndex > 0 && handleMessage(messagesArray[--currentMessageIndex])
+let checkArrows = () => {
+  if (currentMessageIndex +1 >= messagesArray.length){
+    document.getElementById("forward-arrow").classList.add("deactivated-arrow")
+  }
+  else{
+    document.getElementById("forward-arrow").classList.remove("deactivated-arrow")
+  }
+  if (currentMessageIndex <= 0){
+    document.getElementById("back-arrow").classList.add("deactivated-arrow")
+  }
+  else {
+    document.getElementById("back-arrow").classList.remove("deactivated-arrow")
+  }
+}
+
+let messageForward = () => {
+  if (currentMessageIndex + 1 < messagesArray.length){
+    currentMessageIndex ++
+    handleMessage(messagesArray[currentMessageIndex])
+    checkArrows()
+  }
+}
+let messageBackward = () => {
+  if (currentMessageIndex > 0){
+    currentMessageIndex --
+    handleMessage(messagesArray[currentMessageIndex])
+    checkArrows()
+  }
+}
 
 
 // createElementByFirstName("nicky")

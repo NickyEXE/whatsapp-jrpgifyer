@@ -90,6 +90,10 @@ function renderApp(){
     -webkit-text-stroke-color: #272727;
     bottom: 0em;
   }
+
+  .deactivated-arrow {
+    display: none;
+  }
   `
 
   document.head.appendChild(style)
