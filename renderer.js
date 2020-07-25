@@ -5,7 +5,7 @@ function renderApp(){
   let main = document.createElement("main")
   main.innerHTML = `
   <div class="jrpg-main">
-    <div class="arrows"><span id="back-arrow">◂</span> <span id="forward-arrow">▸</span></div>
+    <div class="arrows"><span id="back-arrow">▴</span> <span id="forward-arrow">▾</span></div>
     <button id="auto-reader-button">Real Time Messages: Off</button>
   </div>`
 

@@ -172,7 +172,7 @@ function renderApp(){
   let main = document.createElement("main")
   main.innerHTML = `
   <div class="jrpg-main">
-    <div class="arrows"><span id="back-arrow">◂</span> <span id="forward-arrow">▸</span></div>
+    <div class="arrows"><span id="back-arrow">▴</span> <span id="forward-arrow">▾</span></div>
     <button id="auto-reader-button">Real Time Messages: Off</button>
   </div>`
 
@@ -277,18 +277,30 @@ function renderApp(){
   `
 
   document.head.appendChild(style)
+  // reuse whatsapp message bar
   document.querySelector("footer").querySelector(".copyable-area").style.backgroundColor = "black"
   document.querySelector("footer").querySelector(".copyable-area").style.fontFamily = `"Palatino Linotype", "Book Antiqua", Palatino, serif`
+  document.querySelector("._1JNuk").style.display = "none"
   document.getElementById("auto-reader-button").addEventListener("click", autoReaderButtonPress)
 }
-// When a message is clicked, grab all the messages and set the clicked one as the first one to render
+// When a message is clicked, grab all the messages and set the clicked one as the first one to render. This initializes the App.
 let selectNode = (node) => {
-  setReaderByFirstName("nicky")
   grabMessages()
   currentMessageIndex = messagesArray.findIndex(hash => node.innerText.includes(hash.time))
   renderApp()
   handleMessage(messagesArray[currentMessageIndex])
+  addEventListeners()
   beginMessagePolling()
+}
+
+const addEventListeners = () => {
+  document.addEventListener("keydown", (e) => {
+    e.keyCode === 40 && messageForward();
+    e.keyCode === 38 && messageBackward();
+    e.keyCode === 13 && turnOnAutoReader()
+  })
+  document.getElementById("back-arrow").addEventListener("click", messageBackward)
+  document.getElementById("forward-arrow").addEventListener("click", messageForward)
 }
 
 const handleUserMessageClick = (e) => {
@@ -298,11 +310,6 @@ const handleUserMessageClick = (e) => {
 }
 
 document.addEventListener("click", handleUserMessageClick)
-
-document.addEventListener("keydown", (e) => {
-  e.keyCode === 39 && messageForward();
-  e.keyCode === 37 && messageBackward();
-})
 
 let autoReader = false
 
@@ -314,7 +321,6 @@ const turnOffAutoReader = () => {
 const turnOnAutoReader = () => {
   autoReader = true
   document.getElementById("auto-reader-button").innerText = "Real Time Messages: On"
-  checkArrows()
 }
 
 const autoReaderButtonPress = () => autoReader ? turnOffAutoReader() : turnOnAutoReader()
@@ -333,3 +339,5 @@ const beginMessagePolling = () => {
     autoReader && autoRead()
   }, 2000)
 }
+
+setReaderByFirstName("nicky")
