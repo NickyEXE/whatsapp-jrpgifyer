@@ -1,3 +1,13 @@
+// Event listener on the character select screen. Once selected, the app is enabled aand reaady to be triggered on message click.
+const selectCharAndReturnPage = (char) => {
+  document.getElementById("characterSelect").remove()
+  document.querySelector("#app").children[0].style.display = ""
+  document.querySelector("#characterSelectStyle").remove()
+  document.addEventListener("click", handleUserMessageClick)
+  alert("You're now ready! Click a message and it will load that and all following messages, JRPG-style. Use UP and DOWN to navigate, or catch up using Real Time Messages.")
+  setReaderByFirstName(char)
+}
+
 // When a message is clicked, grab all the messages and set the clicked one as the first one to render. This initializes the App.
 let selectNode = (node) => {
   grabMessages()
@@ -23,8 +33,6 @@ const handleUserMessageClick = (e) => {
     selectNode(e.target.closest(".message-in, .message-out"))
   }
 }
-
-document.addEventListener("click", handleUserMessageClick)
 
 let autoReader = false
 
@@ -55,4 +63,4 @@ const beginMessagePolling = () => {
   }, 2000)
 }
 
-setReaderByFirstName("nicky")
+renderSelect()

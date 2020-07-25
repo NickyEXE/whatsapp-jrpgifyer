@@ -11,6 +11,27 @@ let startJrpg = document.getElementById('startJrpg');
 chrome.storage.sync.get('reader', function(data) {
   reader = data.reader
   console.log(reader)
+
+  let injection = () => {
+    console.log("clicked!")
+    chrome.tabs.query({active: true, currentWindow: true},
+      function(tabs){
+        chrome.tabs.executeScript(
+          tabs[0].id,
+            {file: '/combined.js'},
+            )
+          }
+      )
+  }
+
+  //   chrome.tabs.executeScript(tab.id, {
+  //     code: 'let cheese = "batman";'
+  //   }, function() {
+  //     chrome.tabs.executeScript(tab.id, {file: 'combined.js'});
+  //   })
+  // }
+  startJrpg.addEventListener("click", injection)
+
 });
 
 // startJrpg.onclick = function () {
@@ -26,26 +47,3 @@ chrome.storage.sync.get('reader', function(data) {
 //         });
 //   });
 // };
-
-let injection = () => {
-  console.log("clicked!")
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-    chrome.tabs.executeScript(
-      tabs[0].id,
-      {code: `const chromeReader= "${reader}"`},
-      function(){
-        chrome.tabs.executeScript(
-          tabs[0].id,
-          {file: '/combined.js'}
-        )
-      }
-    );
-  })
-}
-//   chrome.tabs.executeScript(tab.id, {
-//     code: 'let cheese = "batman";'
-//   }, function() {
-//     chrome.tabs.executeScript(tab.id, {file: 'combined.js'});
-//   })
-// }
-startJrpg.addEventListener("click", injection)

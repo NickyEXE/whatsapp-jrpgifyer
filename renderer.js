@@ -116,3 +116,69 @@ function renderApp(){
   document.querySelector("._1JNuk").style.display = "none"
   document.getElementById("auto-reader-button").addEventListener("click", autoReaderButtonPress)
 }
+
+const renderSelect = () => {
+  let characters = ["carla", "nicky", "grace", "carolin", "maximilian", "andy"]
+  document.querySelector("#app").children[0].style.display = "none"
+  const topDiv = document.createElement("div")
+  topDiv.id = "characterSelect"
+  const h1 = document.createElement("h1")
+  h1.innerText = "Select Your Character!"
+  topDiv.appendChild(h1)
+  const innerDiv = document.createElement("div")
+  innerDiv.id = "charactersList"
+  let style = document.createElement("style")
+  style.id = "characterSelectStyle"
+  style.innerHTML = `
+  #characterSelect {
+    color: yellow;
+    text-align: center;
+    background-color: black;
+    height: 100vh;
+  }
+
+  #characterSelect h1 {
+    font-size: 2em;
+  }
+  #charactersList{
+    padding-top: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: black;
+    color: white;
+  }
+  .card {
+    margin: 1em 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    background-color: #000000;
+    color: white;
+    border-style: solid;
+    border-color: yellow;
+    border-radius: 1em;
+    border-width: 2px;
+    width: 30%;
+    text-align: center;
+  }
+  .card img{
+    width: 200px;
+    height: 200px;
+  }`
+  document.querySelector("#app").appendChild(topDiv)
+  topDiv.appendChild(innerDiv)
+  document.head.appendChild(style)
+  characters.forEach(renderChar)
+}
+
+const renderChar = (char) => {
+  const div = document.createElement('div')
+  div.innerHTML = `
+      <img src=${nameHash[char].image} alt=${nameHash[char].characterName}/>
+      <h3>${nameHash[char].characterName}</h3>
+  `
+  div.classList.add("card")
+  div.id = char
+  div.addEventListener('click', () => selectCharAndReturnPage(char))
+  document.querySelector("#charactersList").appendChild(div)
+}
