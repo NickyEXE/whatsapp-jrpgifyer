@@ -7,12 +7,15 @@ let firstPreviousSiblingWithFunc = (node, func) => {
 }
 
 let doesMessageHavePlayerName = (node) => {
-  return [...node.querySelector("._274yw").children].length === 3
+  // Checking a previous node bypasses the if statement in create message from node. This ensures that it doesn't error.
+  if (node.querySelector("._274yw")){
+    return [...node.querySelector("._274yw").children].length === 3
+  }
 }
 
 function hashCode(s) {
   let h;
   for(let i = 0; i < s.length; i++)
-        h = Math.imul(31, h) + s.charCodeAt(i) | 0;
+    h = Math.imul(31, h) + s.charCodeAt(i) | 0;
   return h;
 }

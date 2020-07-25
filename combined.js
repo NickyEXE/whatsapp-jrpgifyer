@@ -7,14 +7,16 @@ let firstPreviousSiblingWithFunc = (node, func) => {
 }
 
 let doesMessageHavePlayerName = (node) => {
-  return [...node.querySelector("._274yw").children].length === 3
+  // Checking a previous node bypasses the if statement in create message from node. This ensures that it doesn't error.
+  if (node.querySelector("._274yw")){
+    return [...node.querySelector("._274yw").children].length === 3
+  }
 }
 
 function hashCode(s) {
   let h;
   for(let i = 0; i < s.length; i++)
-        h = Math.imul(31, h) + s.charCodeAt(i) | 0;
-
+    h = Math.imul(31, h) + s.charCodeAt(i) | 0;
   return h;
 }
 let messagesArray = []
@@ -139,6 +141,7 @@ function renderApp(){
 
   let main = document.createElement("main")
   main.innerHTML = `<div class="jrpg-main">
+  <div class="arrows"><span id="back-arrow">◂</span> <span id="forward-arrow">▸</span></div>
   </div>`
 
   document.querySelector("#app").appendChild(main)
@@ -210,6 +213,18 @@ function renderApp(){
     height: 20vh;
     object-fit: cover;
     object-position: 50% 0%;
+  }
+
+  .arrows {
+    position: fixed;
+    font-size: 4em;
+    z-index: 2;
+    color: black;
+    right: .5em;
+    -webkit-text-fill-color: #db955991;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: #272727;
+    bottom: 0em;
   }
   `
 

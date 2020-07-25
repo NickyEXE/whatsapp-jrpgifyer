@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   background-color: black;
+  background-image: url(https://i.imgur.com/TuTeXwS.jpg);
   color: #747474;
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: .9em;
@@ -23,6 +24,8 @@
   border-style: solid;
   border-width: 2px;
   border-color: white;
+  overflow: scroll;
+  max-height: 20vh;
 }
 
 .character-name{
@@ -60,4 +63,16 @@
   height: 20vh;
   object-fit: cover;
   object-position: 50% 0%;
+}
+
+.arrows {
+  position: fixed;
+  font-size: 4em;
+  z-index: 2;
+  color: black;
+  right: .5em;
+  -webkit-text-fill-color: #db955991;
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: #272727;
+  bottom: 0em;
 }
