@@ -52,7 +52,4 @@ function grabMessages(){
     charactersHash[nam] = 1
   }
   messagesArray.forEach(objInHash)
-  console.log("new Message Array Length", messagesArray.length)
-  console.log("currentMessageIndex", currentMessageIndex)
-  console.log("currentMessageAtIndex", messagesArray[currentMessageIndex])
 }

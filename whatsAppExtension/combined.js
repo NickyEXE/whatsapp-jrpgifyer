@@ -89,7 +89,7 @@ function setReaderByFirstName(name){
     nameHash["reader"] = nameHash[name]
   }
   else{
-    console.log("Please enter one of the following without quotes:", Object.keys(nameHash))
+    console.log("Please enter one of the following without quotes:", nameHash.keys)
   }
 }
 
